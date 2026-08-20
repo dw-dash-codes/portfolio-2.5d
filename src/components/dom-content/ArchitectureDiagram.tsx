@@ -11,9 +11,9 @@ export const ArchitectureDiagram: React.FC<ArchitectureDiagramProps> = ({ opacit
   return (
     <div
       style={{ opacity, transition: 'opacity 0.3s ease' }}
-      className="absolute inset-0 flex flex-col justify-center items-center p-6 md:p-12 z-30 pointer-events-auto text-sand-50"
+      className="absolute inset-0 flex flex-col justify-center items-start p-6 md:p-12 z-30 pointer-events-auto text-sand-50 pl-8 md:pl-16"
     >
-      <div className="w-full max-w-5xl space-y-6">
+      <div className="w-full max-w-3xl space-y-6">
         <div className="border-b border-indigo-500/30 pb-4">
           <span className="text-xs font-mono tracking-widest text-indigo-400 uppercase font-semibold">
             FRAME 04 // ROOM 02 (INDIGO TECH CHAMBER)
@@ -26,7 +26,7 @@ export const ArchitectureDiagram: React.FC<ArchitectureDiagramProps> = ({ opacit
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Backend Architecture Node Card */}
           <Card3D className="space-y-4 bg-navy-900/90 border-indigo-500/40 shadow-2xl">
             <div className="flex items-center justify-between">

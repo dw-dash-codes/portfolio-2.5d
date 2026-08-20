@@ -34,6 +34,7 @@ export const StoryProgressBar: React.FC<StoryProgressBarProps> = ({
               aria-current={isActive ? 'step' : undefined}
               className="group relative flex items-center justify-end"
             >
+              {/* Dynamic Tooltip: Reads directly from scene.title */}
               <span
                 className={`absolute right-7 py-1 px-2.5 rounded text-xs font-medium tracking-wide uppercase opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-md border ${
                   isDarkScene
@@ -41,7 +42,7 @@ export const StoryProgressBar: React.FC<StoryProgressBarProps> = ({
                     : 'bg-sand-50 text-ink-600 border-sand-400/40'
                 }`}
               >
-                {scene.index.toString().padStart(2, '0')} // {scene.title}
+                0{scene.index} // {scene.title}
               </span>
 
               <div

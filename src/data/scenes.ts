@@ -213,12 +213,12 @@ export const SCENES: Scene[] = [
   },
 
   // =========================================================================
-  // SCENE 4: BACKEND & AI PIPELINES (Room 2)
+  // SCENE 4: BACKEND & APPLICATION PIPELINES (Room 2 - Indigo Chamber)
   // =========================================================================
   {
-    id: 'scene-4-backend-ai',
+    id: 'scene-4-backend-app-pipelines',
     index: 4,
-    title: 'Backend & AI Pipelines',
+    title: 'Backend & Application Pipelines',
     slug: 'backend-ai',
     durationVh: 130,
     doorType: 'hinge-right',

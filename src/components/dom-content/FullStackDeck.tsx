@@ -55,9 +55,9 @@ export const FullStackDeck: React.FC<FullStackDeckProps> = ({ opacity = 1 }) => 
   return (
     <div
       style={{ opacity, transition: 'opacity 0.3s ease' }}
-      className="absolute inset-0 flex flex-col justify-center items-center p-6 md:p-12 z-30 pointer-events-auto text-ink-600"
+      className="absolute inset-0 flex flex-col justify-center items-end p-6 md:p-12 z-30 pointer-events-auto text-ink-600 pr-8 md:pr-16"
     >
-      <div className="w-full max-w-5xl space-y-6">
+      <div className="w-full max-w-3xl space-y-6">
         {/* Header and Filter Tabs */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-sand-400/30 pb-4">
           <div>
