@@ -1,0 +1,84 @@
+@import '@fontsource-variable/outfit';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --sand-50: #E6DFD2;
+  --sand-200: #CBBFAB;
+  --sand-400: #A4937A;
+  --ink-600: #4A453F;
+  --navy-800: #1B2133;
+  --navy-900: #0F1422;
+
+  color-scheme: dark;
+}
+
+/* CSS Reset & Global Scroll Behavior */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--navy-900);
+  color: var(--sand-50);
+  font-family: 'OutfitVariable', 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior: none;
+  overflow-x: hidden;
+}
+
+/* Lenis Specific Styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Hardware Compositing & Performance Utilities */
+.gpu-layer {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Prefers Reduced Motion Media Query */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
