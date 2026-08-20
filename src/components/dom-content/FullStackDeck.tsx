@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card3D } from '../ui/Card3D';
 import { Badge } from '../ui/Badge';
-import { Code2, Database, Layout, Wrench } from 'lucide-react';
+import { Code2, Database, Layout, Cloud } from 'lucide-react';
 
 interface FullStackDeckProps {
   opacity?: number;
@@ -11,37 +11,37 @@ const CATEGORIES = [
   { id: 'frontend', label: 'Frontend', icon: Layout },
   { id: 'backend', label: 'Backend', icon: Code2 },
   { id: 'database', label: 'Database', icon: Database },
-  { id: 'tools', label: 'Tools', icon: Wrench },
+  { id: 'devops', label: 'Cloud & DevOps', icon: Cloud },
 ] as const;
 
 const SKILLS_DATA = [
   {
     category: 'frontend',
-    title: 'Design Systems & Reactive UI',
+    title: 'React & Next.js Ecosystem',
     role: 'Frontend Engineering',
-    tags: ['React 18', 'TypeScript', 'Tailwind', 'Next.js', 'Web Vitals'],
-    desc: 'High-speed component architectures optimized for sub-50ms interaction latencies and zero layout shifts.',
+    tags: ['React', 'Next.js', 'TypeScript'],
+    desc: 'Building responsive user interfaces, server-side rendered applications, and modular component systems.',
   },
   {
     category: 'backend',
-    title: 'Distributed Microservices',
-    role: 'Systems Architecture',
-    tags: ['Node.js', 'Go', 'gRPC', 'GraphQL', 'Event-Driven'],
-    desc: 'Fault-tolerant distributed services handling millions of concurrent requests with structured telemetry.',
+    title: 'Node.js & Python Services',
+    role: 'Backend Engineering',
+    tags: ['Node.js', 'Express', 'Python', 'FastAPI'],
+    desc: 'Developing RESTful APIs, asynchronous services, and scalable server-side business logic.',
   },
   {
     category: 'database',
-    title: 'Data Modeling & Vector Storage',
+    title: 'Relational & Document Databases',
     role: 'Database Engineering',
-    tags: ['PostgreSQL', 'Redis', 'pgvector', 'ClickHouse', 'Prisma'],
-    desc: 'Polyglot persistence layers designed for sub-millisecond query caches and high-throughput vector similarity search.',
+    tags: ['PostgreSQL/Supabase', 'MongoDB'],
+    desc: 'Designing structured schemas, document models, efficient queries, and reliable data persistence.',
   },
   {
-    category: 'tools',
-    title: 'DevOps & Pipeline Automation',
-    role: 'Infrastructure & Cloud',
-    tags: ['Docker', 'Kubernetes', 'AWS', 'Terraform', 'CI/CD'],
-    desc: 'Immutable infrastructure as code and zero-downtime blue/green deployment workflows.',
+    category: 'devops',
+    title: 'Cloud Infrastructure & Containers',
+    role: 'Deployment & Tooling',
+    tags: ['AWS', 'Docker'],
+    desc: 'Containerizing services with Docker and deploying robust applications to AWS cloud environments.',
   },
 ];
 
@@ -55,16 +55,16 @@ export const FullStackDeck: React.FC<FullStackDeckProps> = ({ opacity = 1 }) => 
   return (
     <div
       style={{ opacity, transition: 'opacity 0.3s ease' }}
-      className="absolute inset-0 flex flex-col justify-center items-center p-6 md:p-12 z-30 pointer-events-auto"
+      className="absolute inset-0 flex flex-col justify-center items-center p-6 md:p-12 z-30 pointer-events-auto text-ink-600"
     >
       <div className="w-full max-w-5xl space-y-6">
         {/* Header and Filter Tabs */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-sand-400/20 pb-4">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-sand-400/30 pb-4">
           <div>
-            <span className="text-xs font-mono tracking-widest text-sand-400 uppercase">
+            <span className="text-xs font-mono tracking-widest text-sand-400 uppercase font-semibold">
               FRAME 03 // ROOM 01
             </span>
-            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-sand-50 uppercase font-display">
+            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-ink-600 uppercase font-display">
               FULL-STACK DEVELOPMENT
             </h2>
           </div>
@@ -77,10 +77,10 @@ export const FullStackDeck: React.FC<FullStackDeckProps> = ({ opacity = 1 }) => 
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono tracking-wider uppercase transition-all duration-200 ${
+                  className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-mono tracking-wider uppercase transition-all duration-200 ${
                     isActive
-                      ? 'bg-sand-200 text-navy-900 font-semibold shadow-md'
-                      : 'bg-navy-800/80 text-sand-200 hover:bg-navy-800 border border-sand-400/20'
+                      ? 'bg-ink-600 text-sand-50 font-semibold shadow-md'
+                      : 'bg-sand-200/70 text-ink-600 hover:bg-sand-200 border border-sand-400/40'
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5" />
@@ -92,21 +92,21 @@ export const FullStackDeck: React.FC<FullStackDeckProps> = ({ opacity = 1 }) => 
         </div>
 
         {/* Skill / Capability Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {filteredSkills.map((item, idx) => (
-            <Card3D key={idx} className="space-y-3">
+            <Card3D key={idx} className="space-y-3 bg-sand-50/95 border-sand-400/40 text-ink-600 shadow-xl">
               <div className="flex justify-between items-start">
-                <h3 className="text-lg font-bold text-sand-50 font-display">
+                <h3 className="text-lg font-bold text-ink-600 font-display">
                   {item.title}
                 </h3>
                 <Badge variant="sand">{item.role}</Badge>
               </div>
-              <p className="text-xs sm:text-sm text-sand-200/80 leading-relaxed font-light">
+              <p className="text-xs sm:text-sm text-ink-600/80 leading-relaxed font-light">
                 {item.desc}
               </p>
               <div className="flex flex-wrap gap-1.5 pt-2">
                 {item.tags.map((tag, tIdx) => (
-                  <Badge key={tIdx} variant="outline" className="text-[10px]">
+                  <Badge key={tIdx} variant="outline" className="text-[11px] border-sand-400/50 text-ink-600 bg-sand-200/40">
                     {tag}
                   </Badge>
                 ))}

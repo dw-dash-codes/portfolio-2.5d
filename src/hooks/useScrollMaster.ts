@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SCENES_CONFIG } from '../config/scenes';
+import { SCENES } from '../data/scenes';
 import { useLenis } from '../components/SmoothScroll';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -19,7 +19,7 @@ export const useScrollMaster = (containerRef: React.RefObject<HTMLElement | null
   const [globalProgress, setGlobalProgress] = useState<number>(0);
   const { lenis } = useLenis();
 
-  const totalScenes = SCENES_CONFIG.length;
+  const totalScenes = SCENES.length;
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -35,8 +35,8 @@ export const useScrollMaster = (containerRef: React.RefObject<HTMLElement | null
 
         // Map global progress (0.0 to 1.0) to discrete scene index (1 to totalScenes)
         const rawScene = progress * totalScenes;
-        const index = Math.min(totalScenes, Math.max(1, Math.floor(rawScene) + 1));
-        const subProgress = rawScene - (index - 1);
+        const index = progress >= 0.99 ? totalScenes : Math.min(totalScenes, Math.max(1, Math.floor(rawScene) + 1));
+        const subProgress = progress >= 0.99 ? 1 : rawScene - (index - 1);
 
         setCurrentSceneIndex(index);
         setSceneProgress(Math.max(0, Math.min(1, subProgress)));
@@ -51,12 +51,18 @@ export const useScrollMaster = (containerRef: React.RefObject<HTMLElement | null
   const scrollToScene = useCallback(
     (sceneIndex: number) => {
       if (!containerRef.current) return;
-      const targetProgress = (sceneIndex - 1) / totalScenes;
+      const targetProgress =
+        sceneIndex === 1
+          ? 0
+          : sceneIndex === totalScenes
+          ? 1
+          : ((sceneIndex - 1) + 0.1) / totalScenes;
+
       const scrollHeight = containerRef.current.offsetHeight - window.innerHeight;
       const targetScroll = targetProgress * scrollHeight;
 
       if (lenis) {
-        lenis.scrollTo(targetScroll, { duration: 1.4 });
+        lenis.scrollTo(targetScroll, { duration: 1.2 });
       } else {
         window.scrollTo({ top: targetScroll, behavior: 'smooth' });
       }

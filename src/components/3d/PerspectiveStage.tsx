@@ -1,5 +1,5 @@
 import React from 'react';
-import { SCENES_CONFIG } from '../../config/scenes';
+import { SCENES } from '../../data/scenes';
 import { ParallaxLayer } from './ParallaxLayer';
 import { Door3D } from './Door3D';
 import { CharacterSprite } from '../character/CharacterSprite';
@@ -21,7 +21,9 @@ export const PerspectiveStage: React.FC<PerspectiveStageProps> = ({
   sceneProgress,
   isReducedMotion = false,
 }) => {
-  const currentScene = SCENES_CONFIG.find((s) => s.index === currentSceneIndex) || SCENES_CONFIG[0]!;
+  const currentScene = SCENES.find((s) => s.index === currentSceneIndex) || SCENES[0]!;
+
+  const isDarkScene = currentSceneIndex === 4;
 
   return (
     <div
@@ -30,16 +32,17 @@ export const PerspectiveStage: React.FC<PerspectiveStageProps> = ({
         perspective: '1200px',
         perspectiveOrigin: '50% 50%',
       }}
-      className="fixed inset-0 w-screen h-screen overflow-hidden bg-navy-900 select-none preserve-3d"
+      className={`fixed inset-0 w-screen h-screen overflow-hidden select-none preserve-3d transition-colors duration-700 ${
+        isDarkScene ? 'bg-navy-900 text-sand-50' : 'bg-sand-50 text-ink-600'
+      }`}
     >
-      {/* Dynamic Scene Ambient Glow / Horizon Lighting */}
+      {/* Dynamic Ambient Lighting / Glow */}
       <div
-        className="absolute inset-0 pointer-events-none transition-opacity duration-700 opacity-30"
+        className="absolute inset-0 pointer-events-none transition-opacity duration-700 opacity-40"
         style={{
-          background:
-            currentSceneIndex === 4
-              ? 'radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.25) 0%, transparent 70%)'
-              : 'radial-gradient(circle at 50% 40%, rgba(230, 223, 210, 0.15) 0%, transparent 60%)',
+          background: isDarkScene
+            ? 'radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.3) 0%, transparent 70%)'
+            : 'radial-gradient(circle at 50% 35%, rgba(245, 239, 235, 0.8) 0%, transparent 60%)',
         }}
       />
 
@@ -48,6 +51,7 @@ export const PerspectiveStage: React.FC<PerspectiveStageProps> = ({
         <ParallaxLayer
           key={`${currentScene.id}-${layer.id}`}
           layer={layer}
+          sceneIndex={currentSceneIndex}
           progress={sceneProgress}
           isReducedMotion={isReducedMotion}
         />
@@ -56,7 +60,7 @@ export const PerspectiveStage: React.FC<PerspectiveStageProps> = ({
       {/* 3D Doors */}
       <Door3D type={currentScene.doorType} progress={sceneProgress} />
 
-      {/* Walking Character */}
+      {/* Walking Character - Exactly ONE instance with masked walk cycle */}
       <CharacterSprite
         sceneIndex={currentSceneIndex}
         sceneProgress={sceneProgress}

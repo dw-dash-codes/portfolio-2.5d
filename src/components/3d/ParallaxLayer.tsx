@@ -1,14 +1,17 @@
 import React from 'react';
 import { Layer } from '../../types/scene';
+import { LayerImage } from './LayerImage';
 
 interface ParallaxLayerProps {
   layer: Layer;
+  sceneIndex: number;
   progress: number; // 0 to 1 progress within this scene
   isReducedMotion?: boolean;
 }
 
 export const ParallaxLayer: React.FC<ParallaxLayerProps> = ({
   layer,
+  sceneIndex,
   progress,
   isReducedMotion = false,
 }) => {
@@ -35,23 +38,12 @@ export const ParallaxLayer: React.FC<ParallaxLayerProps> = ({
       }}
       className="absolute inset-0 w-full h-full flex items-center justify-center pointer-events-none gpu-layer"
     >
-      {/* Visual representation / background plate */}
       <div className="relative w-full h-full flex items-center justify-center">
-        {/* Placeholder architectural visual frame matching depth and theme */}
-        <div
-          className={`w-full h-full transition-opacity duration-300 ${
-            layer.isCutout ? 'bg-transparent' : 'bg-navy-900/90'
-          }`}
-        >
-          {/* Subtle architectural atmosphere grid pattern */}
-          <div
-            className="w-full h-full opacity-20"
-            style={{
-              backgroundImage: `radial-gradient(circle at 50% 50%, rgba(203, 191, 171, 0.15) 1px, transparent 1px)`,
-              backgroundSize: '40px 40px',
-            }}
-          />
-        </div>
+        <LayerImage
+          layer={layer}
+          sceneIndex={sceneIndex}
+          className="w-full h-full"
+        />
       </div>
     </div>
   );
